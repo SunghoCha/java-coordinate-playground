@@ -2,6 +2,7 @@ package controller;
 
 import service.CoordinateService;
 import view.InputView;
+import view.ResultView;
 
 import java.util.List;
 
@@ -11,6 +12,6 @@ public class Application {
         List<String[]> coordinates = InputView.getCoordinates();
         CoordinateService coordinateService = new CoordinateService(coordinates);
         double result = coordinateService.calculate();
-        System.out.printf("두 점 사이 거리는 %f",  result);
+        ResultView.print(coordinates, result);
     }
 }
