@@ -8,8 +8,8 @@ import static java.lang.Math.abs;
 public class Square implements Shape {
 
     private final List<Point> points = new ArrayList<>();
-    HashSet<Integer> setX = new HashSet<>();
-    HashSet<Integer> setY = new HashSet<>();
+    private final HashSet<Integer> setX = new HashSet<>();
+    private final HashSet<Integer> setY = new HashSet<>();
 
     public Square(List<String[]> pointStrings) {
         if (!hasFourPoints(pointStrings)) {

@@ -25,6 +25,7 @@ public class InputViewTest {
         assertThat(Pattern.matches(pattern, string)).isTrue();
         assertThat(Pattern.matches(pattern, string1)).isTrue();
         assertThat(Pattern.matches(pattern, string2)).isTrue();
+        assertThat(Pattern.matches(pattern, string3)).isTrue();
         assertThat(Pattern.matches(pattern, string4)).isFalse();
     }
 
