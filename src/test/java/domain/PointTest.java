@@ -15,21 +15,16 @@ public class PointTest {
 
     @Test
     void 잘못된_좌표값_입력시_오류발생() {
-        List<Integer> numbers = Arrays.asList(1,25);
-        List<Integer> numbers2 = Arrays.asList(-1,2);
-        assertThatThrownBy(() -> new Point(numbers)).isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> new Point(numbers2)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new Point(1,25)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new Point(-1, 2)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     @DisplayName("두 point간 거리 계산 함수")
     void calculateDistance() {
-        List<Integer> numbers = Arrays.asList(1,2);
-        List<Integer> numbers2 = Arrays.asList(4,5);
-        Point point = new Point(numbers);
-        Point point2 = new Point(numbers2);
+        Point point = new Point(1,2);
+        Point point2 = new Point(4,5);
+        //then
         assertThat(point.calculateDistance(point2)).isEqualTo(4.2426, offset(0.00099));
     }
-
-
 }

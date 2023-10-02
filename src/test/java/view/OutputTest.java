@@ -1,23 +1,23 @@
 package view;
 
 import domain.Point;
-import service.ShapeDTO;
+import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.List;
 
-public class ResultView {
+public class OutputTest {
+
     public static final String BLANK = "    ";
     public static final String ORIGIN = "+";
     public static final String MARKER = "*";
     public static final String HORIZONTAL_AXIS = "----";
     public static final String VERTICAL_AXIS = "|";
 
-    public static void showShapeInfo(ShapeDTO shapeDTO) {
-        System.out.println(shapeDTO.getShapeInfo());
-    }
-
-    public static void showCoordinatePlane(ShapeDTO shapeDTO) {
-        List<Point> points = shapeDTO.getPoints();
+    @Test
+    void resultPrint() {
+        List<Point> points = Arrays.asList(new Point(1, 1),new Point(2, 2), new Point(3, 3), new Point(4, 4),
+                new Point(5, 5),new Point(6, 6));
 
         showYAxisWithPoints(points);
         showXAxis();
@@ -42,7 +42,6 @@ public class ResultView {
         for (int x = 0; x <= 24; x++) {
             showAxisNumber(x);
         }
-        emptyLine();
     }
 
     private static void showXAxis() {

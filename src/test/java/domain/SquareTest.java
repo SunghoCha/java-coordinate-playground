@@ -1,8 +1,12 @@
 package domain;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import view.InputView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
@@ -11,16 +15,18 @@ public class SquareTest {
 
     @Test
     void 사다리꼴좌표입력시_오류() {
-        String string = "(1,2)-(4,5)-(5,6)-(7,8)";
-        List<String[]> numbers = InputView.convert(string);
-        assertThatThrownBy( () -> new Square(numbers)).isInstanceOf(IllegalArgumentException.class);
+        List<Point> points = Arrays.asList(new Point(1,3),new Point(10,21),
+                new Point(4,3),new Point(4,5));
+        //then
+        assertThatThrownBy( () -> new Square(points)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     void 직사각형좌표입력시_면적계산() {
-        String string = "(1,3)-(1,5)-(4,3)-(4,5)";
-        List<String[]> numbers = InputView.convert(string);
-        Square square = new Square(numbers);
+        List<Point> points = Arrays.asList(new Point(1,3),new Point(1,5),
+                new Point(4,3),new Point(4,5));
+        Square square = new Square(points);
+        //then
         assertThat(square.area()).isEqualTo(6);
     }
 }

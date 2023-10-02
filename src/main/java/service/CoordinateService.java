@@ -1,25 +1,38 @@
 package service;
 
-import domain.Line;
-import domain.Shape;
-import domain.Square;
-import domain.Triangle;
+import domain.*;
 
-import java.util.List;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class CoordinateService {
     private Shape shape;
+    private static final HashMap<Integer, Function<List<Point>, Shape>> classifier = new HashMap<>();
+
+    static {
+        classifier.put(2,Line::new);
+        classifier.put(3,Triangle::new);
+        classifier.put(4,Square::new);
+    }
 
     public CoordinateService(List<String[]> strings) {
-        if (strings.size() == 2){
-            this.shape = new Line(strings);
+        List<Point> points = convertToPoints(strings);
+        this.shape = classifier.get(strings.size()).apply(points);
+        shape.calculate();
+    }
+
+    private List<Point> convertToPoints(List<String[]> strings) {
+        List<Point> points = new ArrayList<>();
+        for (String[] string : strings) {
+            List<Integer> numbers = Arrays.stream(string).map(Integer::parseInt).collect(Collectors.toList());
+            points.add(new Point(numbers.get(0), numbers.get(1)));
         }
-        if (strings.size() == 3){
-            this.shape = new Triangle(strings);
-        }
-        if (strings.size() == 4){
-            this.shape = new Square(strings);
-        }
+        return points;
+    }
+
+    public ShapeDTO getResult() {
+        return ShapeDTO.from(shape);
     }
 
     public double calculate() {
